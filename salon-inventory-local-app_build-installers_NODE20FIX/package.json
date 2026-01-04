@@ -1,0 +1,60 @@
+{
+  "name": "salon-inventory-local",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Standalone local inventory + P&L app for hair salons (Electron + React + SQLite).",
+  "main": "electron/main.cjs",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently -k \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "build": "vite build",
+    "preview": "vite preview",
+    "pack": "npm run build && electron-builder --dir",
+    "dist": "npm run build && electron-builder"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.4.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^9.0.1",
+    "electron": "^31.3.1",
+    "electron-builder": "^24.13.3",
+    "vite": "^5.4.8",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.local.saloninventory",
+    "productName": "Salon Inventory",
+    "directories": {
+      "output": "dist_electron"
+    },
+    "files": [
+      "electron/**/*",
+      "dist/**/*",
+      "package.json"
+    ],
+    "extraResources": [],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">=20 <23"
+  }
+}
